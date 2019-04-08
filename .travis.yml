@@ -1,2 +1,11 @@
-script:
-- echo 1
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_9ab04b43ec0a_key -iv $encrypted_9ab04b43ec0a_iv -in service-account.json.enc -out service-account.json -d
+
+deploy:
+- provider: gae
+  keyfile: service-account.json
+  project: path-routing-test
+  on: master
+
+after_script:
+- curl http://path-routing-test.appspot.com/hello && curl http://path-routing-test.appspot.com/world
