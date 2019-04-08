@@ -7,4 +7,5 @@ install:
 script:
 - ./script/deploy.sh projects/hello
 - ./script/deploy.sh projects/world
+- pip -r requirements.txt
 - python script/test.py
